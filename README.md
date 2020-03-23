@@ -37,3 +37,15 @@ Naive part: we assume that all features in x are mutually independent, condition
 `p(Ck|x1,...,xn)` is proportional to `p(Ck)*p(x1|Ck)*..*p(xn|Ck)` which we can scale with:
 
 `evidence: Z = p(x) = p(C1)*p(x|C1) + p(C2)*p(x|C2) * ...`
+
+To conclude, the Naive Bayes probability model is denoted as follows:
+
+`p(Ck|x1,..,xn) = 1/Z * p(Ck) * p(x1|Ck) * ... * p(xn|Ck)`
+
+The Naive Bayes Classifier combines this model with a decision rule, which is often to pick the hypothesis that is most probable (maximum a posteriori decision rule) - pick the Ck for which the probability is the highest.
+
+# initialization
+
+We can calculate the initial values for p(Ck) in two ways:
+* assuming equiprobable classes - p(Ck) = 1 / #classes
+* calculating an estimate for the class probability from the training set - p(Ck) = |Ck| / #samples
