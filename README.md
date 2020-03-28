@@ -1,6 +1,14 @@
 # Machine-Learning-Twitter-Sentiment-Analysis
 Machine Learning: implementation of the Naive Bayes algorithm for creating a mathematical model for evaluating tweets as positive or negative.
 
+# Project
+
+Create a model that can distinguish a tweet as positive (class: 1) or negative (class: 0), using the Naive Bayes Classification algorithm. Data is unstructured - before the classification algorithm, it needs to be processed.
+
+Data: data was given by Racunarski fakultet, for the purpose of this project. Therefore, I cannot make it public.
+
+# Machine learning
+
 Machine learning is the scientific study of algorithms and statistical models that computer systems use to perform a specific task without using explicit instructions. Machine learning algorithms build a mathematical model based on sample data (training data) in order to make predictions or decisions without being explicitly programmed to perform the task.
 
 # Models for classification
@@ -49,3 +57,15 @@ The Naive Bayes Classifier combines this model with a decision rule, which is of
 We can calculate the initial values for p(Ck) in two ways:
 * assuming equiprobable classes - p(Ck) = 1 / #classes
 * calculating an estimate for the class probability from the training set - p(Ck) = |Ck| / #samples
+
+# NLP
+
+Natural Language Processing is a field in machine learning with the ability of a computer to understand, analyze, manipulate and potentually generate human language.
+
+While reading data, we get data in the structured or unstructured format. A structured format has a wel defined pattern whereas unstructured data has no proper structure.
+
+Cleaning up the text data is necessary to highlight attributes that we're going to want our machine learning system to pick up on. It usually consists of removing punctuation, tokenization (separating texts into untis - sentences/words), and removing stopwords (the, is, in, at, for...).
+
+Stemming helps reduce a word to its stem form because it often makes sense to treat related words in the same way. It removes suffices (-ing, -ly..). Lemmatizing derives the root form of a word. It's more axxurate than stemming as it uses a dictionary-based approach - the morphological analysis to the root word, but stemming is faster than lemmatizing because it simply chops off the end of the word.
+
+Vectorizing data is the process of encoding text to a numeric form in order to create feature vectors, so that machine learning algorithms can understand the data.
