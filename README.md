@@ -3,9 +3,12 @@ Machine Learning: implementation of the Naive Bayes algorithm for creating a mat
 
 # Project
 
-Create a model that can distinguish a tweet as positive (class: 1) or negative (class: 0), using the Naive Bayes Classification algorithm. Data is unstructured - before the classification algorithm, it needs to be processed.
+Create a model that can distinguish a tweet as positive (class: 1) or negative (class: 0), using the Naive Bayes Classification algorithm. Data is semistructured - before the classification algorithm, it needs to be processed.
 
 Data: data was given by Racunarski fakultet, for the purpose of this project. Therefore, I cannot make it public.
+
+Form of the data is as follows:
+csv file, tokens: (id, sentiment, sentimentText)
 
 # Machine learning
 
@@ -69,3 +72,7 @@ Cleaning up the text data is necessary to highlight attributes that we're going 
 Stemming helps reduce a word to its stem form because it often makes sense to treat related words in the same way. It removes suffices (-ing, -ly..). Lemmatizing derives the root form of a word. It's more axxurate than stemming as it uses a dictionary-based approach - the morphological analysis to the root word, but stemming is faster than lemmatizing because it simply chops off the end of the word.
 
 Vectorizing data is the process of encoding text to a numeric form in order to create feature vectors, so that machine learning algorithms can understand the data.
+
+# Libraries used
+
+* csv - module which implements classes to read and write tabular data in CSV format. csv.reader returns a reader object which will iterate over lines in the given csvfile.
