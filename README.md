@@ -14,6 +14,10 @@ csv file, tokens: (id, sentiment, sentimentText)
 
 Machine learning is the scientific study of algorithms and statistical models that computer systems use to perform a specific task without using explicit instructions. Machine learning algorithms build a mathematical model based on sample data (training data) in order to make predictions or decisions without being explicitly programmed to perform the task.
 
+A feature is an individual measurable property or characteristic of a phenomenon being observed. Features are the basic building blocks of data sets, and their quality has a major impact on the quality of the insights gained from using that dataset for machine learning. 
+
+Feature selection is the process where you automatically or manually select features which contribute most to your prediction variable or output in which you are interested in. When talking about document analysis, feature selection is the process of selecting what we think is worthwhhile in our documents, and what can be ignored. It consists of both document embedding schema and feature selection methods.
+
 # Models for classification
 
 Classifiers are models that assign class labels to problem instances, represented as vectors of feature values, where the class labels are drawn from some finite set.
@@ -76,3 +80,7 @@ Vectorizing data is the process of encoding text to a numeric form in order to c
 # Libraries used
 
 * csv - module which implements classes to read and write tabular data in CSV format. csv.reader returns a reader object which will iterate over lines in the given csvfile.
+
+# Solution
+
+Features used in this ML algorithm are sets of words from the same tweet. 
