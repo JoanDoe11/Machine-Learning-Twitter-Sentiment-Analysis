@@ -19,10 +19,25 @@ def load_training_set(path):
 
     return (labels, features)
 
+def split_training_data(scale):
+    data_amount = len(training_labels)
+    border = int(scale * data_amount)
+    learning_labels = training_labels[:border]
+    learning_features = training_features[:border]
+    testing_labels = training_labels[border:]
+    testing_features = training_features[border:]
+
+    learning_data = (learning_labels, learning_features)
+    testing_data = (testing_labels, testing_features)
+    return (learning_data, testing_data)
+
+
 if __name__ == '__main__':
     print("Enter path to csv file:")
     path = input()
 
     print("Loading training data...")
     (training_labels, training_features) = load_training_set(path)
-    print(training_features[1])
+    
+    # 80% of the data will be used for learning, 20% for testing accuracy
+    (learning_data, testing_data) = split_training_data(0.8)
