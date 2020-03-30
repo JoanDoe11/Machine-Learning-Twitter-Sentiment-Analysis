@@ -1,4 +1,5 @@
 import csv
+import nlp_util
 
 def load_training_set(path):
     labels = []     # 0=negative, 1=positive 
@@ -11,7 +12,10 @@ def load_training_set(path):
 
         for row in reader:
             labels.append(int(row[1]))
-            features.append(row[2])
+            tweet = row[2]
+            tweet = nlp_util.clean(tweet)
+            tweet = nlp_util.letters_only(tweet)
+            features.append(tweet)
 
     return (labels, features)
 
@@ -21,3 +25,4 @@ if __name__ == '__main__':
 
     print("Loading training data...")
     (training_labels, training_features) = load_training_set(path)
+    print(training_features[1])
