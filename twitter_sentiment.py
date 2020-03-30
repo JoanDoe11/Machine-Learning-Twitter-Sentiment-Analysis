@@ -19,6 +19,27 @@ def load_training_set(path):
 
     return (labels, features)
 
+def init_class(labels, features):
+    positive_features = []
+    negative_features = []
+    for i in range(len(labels)):
+        words = features[i].split(' ')
+        if(labels[i]==0):
+            for word in words:
+                negative_features.append(word)
+        else:
+            for word in words:
+                positive_features.append(word)
+
+    return (positive_features, negative_features)
+
+def learn(learning_data):
+    labels = learning_data[0]
+    features = learning_data[1]
+
+    (positive_features, negative_features) = init_class(labels, features)
+    return (positive_features, negative_features)
+
 def split_training_data(scale):
     data_amount = len(training_labels)
     border = int(scale * data_amount)
@@ -41,3 +62,7 @@ if __name__ == '__main__':
     
     # 80% of the data will be used for learning, 20% for testing accuracy
     (learning_data, testing_data) = split_training_data(0.8)
+
+    print("Learning...")
+    model = learn(learning_data)
+    print(len(model[0]))
