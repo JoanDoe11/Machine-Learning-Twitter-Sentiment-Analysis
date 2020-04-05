@@ -80,6 +80,7 @@ Vectorizing data is the process of encoding text to a numeric form in order to c
 # Libraries used
 
 * csv - module which implements classes to read and write tabular data in CSV format. csv.reader returns a reader object which will iterate over lines in the given csvfile.
+* collections.Counter - a container that keeps track of how many times equivalent values are added. (value:frequency)
 
 # Solution
 
