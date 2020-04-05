@@ -1,5 +1,6 @@
 import csv
 import nlp_util
+from collections import Counter
 
 def load_training_set(path):
     labels = []     # 0=negative, 1=positive 
@@ -33,12 +34,51 @@ def init_class(labels, features):
 
     return (positive_features, negative_features)
 
+# Naive Bayes prediction
+# P(tweet|C) = (freq(words in tweet, C)+1) / |C| + |words in tweet|
+def prediction(tweet, freq, p_class, class_size):
+    tweetWords = Counter(tweet) # words and their occurencies
+    result = 1
+    for word in tweetWords:
+        freqTweet = tweetWords.get(word) # number of occurancies in the tweet
+        freqClass = (freq.get(word) +1) / sum(freq.values()) + class_size
+        
+        result *= freqTweet 
+
+
 def learn(learning_data):
     labels = learning_data[0]
     features = learning_data[1]
+    
 
+    # initialization of classes and their initial members
     (positive_features, negative_features) = init_class(labels, features)
-    return (positive_features, negative_features)
+
+    # calculation of word frequences in classes
+    positive_freq = Counter(positive_features)
+    negative_freq = Counter(negative_features)
+
+    # probability calculations
+    numOfPos = len(positive_features)
+    numOfNeg = len(negative_features)
+    numTotal = numOfPos + numOfNeg
+    # P(class)
+    p_positive = numOfPos / numTotal
+    p_negative = numOfNeg / numTotal
+    
+    #assembling models
+    positive_model = (positive_features, positive_freq, p_positive)
+    negative_model = (negative_features, negative_freq, p_negative)
+
+    return (positive_model, negative_model)
+
+def classify(testing_data):
+    features = testing_data[1] 
+    for tweet in features:
+        continue
+    # P(class|data)
+    
+    return null
 
 def split_training_data(scale):
     data_amount = len(training_labels)
@@ -65,4 +105,7 @@ if __name__ == '__main__':
 
     print("Learning...")
     model = learn(learning_data)
-    print(len(model[0]))
+
+    print("Testing...")
+    test_results = classify(testing_data)
+    
