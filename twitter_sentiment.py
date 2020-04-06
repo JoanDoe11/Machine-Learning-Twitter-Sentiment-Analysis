@@ -35,16 +35,21 @@ def init_class(labels, features):
     return (positive_features, negative_features)
 
 # Naive Bayes prediction
-# P(tweet|C) = (freq(words in tweet, C)+1) / |C| + |words in tweet|
-def prediction(tweet, freq, p_class, class_size):
+# P(tweet|C) = (freq(words in tweet, C)+1) / (|C| + |words in tweet|)
+# P(tweet) = sum(P(tweet|C)*P(C))
+def prediction(tweet, class_model):
+    freq = class_model[1]
+    p_class = class_model[2]
+    class_size = len(class_model[0])
+
     tweetWords = Counter(tweet) # words and their occurencies
     result = 1
     for word in tweetWords:
         freqTweet = tweetWords.get(word) # number of occurancies in the tweet
-        freqClass = (freq.get(word) +1) / sum(freq.values()) + class_size
+        freqClass = freq.get(word,0) # number of occurancies in the class
         
-        result *= freqTweet 
-
+        result *= freqTweet * (freqClass + 1) / (len(tweet) + class_size)
+    return result * p_class
 
 def learn(learning_data):
     labels = learning_data[0]
@@ -72,13 +77,28 @@ def learn(learning_data):
 
     return (positive_model, negative_model)
 
-def classify(testing_data):
-    features = testing_data[1] 
-    for tweet in features:
-        continue
-    # P(class|data)
+
+# calculate max(p(class|tweet)) for all classes and tweets
+# p(class|tweet) = p(class) * p(tweet|class) / p(tweet)
+# p(tweet) = p(positive)*p(tweet|positive) + p(negative)*p(tweet|negative)
+def classify(tweet, model):
+    positive_class = model[0]
+    negative_class = model[1]
+
+    prediction_positive = prediction(tweet, positive_class)
+    prediction_negative = prediction(tweet, negative_class)
     
-    return null
+    p_tweet = prediction_positive + prediction_negative
+    if(p_tweet == 0):
+        print(tweet)
+    else:
+        p_pos_tweet = prediction_positive / p_tweet
+        p_neg_tweet = prediction_negative / p_tweet
+
+        if(p_pos_tweet>=p_neg_tweet):
+            return 1
+        
+    return 0
 
 def split_training_data(scale):
     data_amount = len(training_labels)
@@ -107,5 +127,12 @@ if __name__ == '__main__':
     model = learn(learning_data)
 
     print("Testing...")
-    test_results = classify(testing_data)
+    correct = 0
+    for index, tweet in enumerate(testing_data[1]):
+        tweet_class = classify(testing_data[1], model)
+        if(tweet_class == testing_data[0][index]):
+            correct += 1
+    test_results = len(test_results[0])/correct * 100
+
+    print("Corectness: "+str(test_results))
     
