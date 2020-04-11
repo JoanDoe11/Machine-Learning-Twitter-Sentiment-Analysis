@@ -31,7 +31,7 @@ def init_class(labels, features):
         else:
             for word in words:
                 positive_features.append(word)
-
+    #print("duzina pozitivnih:"+str(len(positive_features))+"; duzina negativnih:"+str(len(negative_features)))
     return (positive_features, negative_features)
 
 # Naive Bayes prediction
@@ -47,7 +47,8 @@ def prediction(tweet, class_model):
     for word in tweetWords:
         freqTweet = tweetWords.get(word) # number of occurancies in the tweet
         freqClass = freq.get(word,0) # number of occurancies in the class
-        
+        #print("freq in tweet:"+str(freqTweet))
+        #print("freq in class:"+str(freqClass))
         result *= freqTweet * (freqClass + 1) / (len(tweet) + class_size)
     return result * p_class
 
@@ -70,6 +71,7 @@ def learn(learning_data):
     # P(class)
     p_positive = numOfPos / numTotal
     p_negative = numOfNeg / numTotal
+    #print("Verovatnoca p/n:"+str(p_positive)+"/"+str(p_negative))
     
     #assembling models
     positive_model = (positive_features, positive_freq, p_positive)
@@ -89,18 +91,16 @@ def classify(tweet, model):
     prediction_negative = prediction(tweet, negative_class)
     
     p_tweet = prediction_positive + prediction_negative
-    if(p_tweet == 0):
-        print(tweet)
-    else:
-        p_pos_tweet = prediction_positive / p_tweet
-        p_neg_tweet = prediction_negative / p_tweet
+    
+    p_pos_tweet = prediction_positive / p_tweet
+    p_neg_tweet = prediction_negative / p_tweet
 
-        if(p_pos_tweet>=p_neg_tweet):
-            return 1
+    if(p_pos_tweet>=p_neg_tweet):
+        return 1
         
     return 0
 
-def split_training_data(scale):
+def split_training_data(training_lables, training_features, scale):
     data_amount = len(training_labels)
     border = int(scale * data_amount)
     learning_labels = training_labels[:border]
@@ -121,7 +121,8 @@ if __name__ == '__main__':
     (training_labels, training_features) = load_training_set(path)
     
     # 80% of the data will be used for learning, 20% for testing accuracy
-    (learning_data, testing_data) = split_training_data(0.8)
+    (learning_data, testing_data) = split_training_data(training_labels, training_features, 0.8)
+
 
     print("Learning...")
     model = learn(learning_data)
@@ -129,10 +130,10 @@ if __name__ == '__main__':
     print("Testing...")
     correct = 0
     for index, tweet in enumerate(testing_data[1]):
-        tweet_class = classify(testing_data[1], model)
+        tweet_class = classify(tweet, model)
         if(tweet_class == testing_data[0][index]):
             correct += 1
-    test_results = len(test_results[0])/correct * 100
+    test_results = correct/len(testing_data[0]) * 100
 
     print("Corectness: "+str(test_results))
     
