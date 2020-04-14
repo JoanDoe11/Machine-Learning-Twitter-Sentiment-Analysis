@@ -42,14 +42,14 @@ def prediction(tweet, class_model):
     p_class = class_model[2]
     class_size = len(class_model[0])
 
-    tweetWords = Counter(tweet) # words and their occurencies
+    tweetWords = Counter(tweet.split(' ')) # words and their occurencies
     result = 1
     for word in tweetWords:
         freqTweet = tweetWords.get(word) # number of occurancies in the tweet
         freqClass = freq.get(word,0) # number of occurancies in the class
         #print("freq in tweet:"+str(freqTweet))
         #print("freq in class:"+str(freqClass))
-        result *= freqTweet * (freqClass + 1) / (len(tweet) + class_size)
+        result *= freqTweet * (freqClass + 1) / class_size
     return result * p_class
 
 def learn(learning_data):
@@ -65,8 +65,8 @@ def learn(learning_data):
     negative_freq = Counter(negative_features)
 
     # probability calculations
-    numOfPos = len(positive_features)
-    numOfNeg = len(negative_features)
+    numOfPos = len(positive_freq)
+    numOfNeg = len(negative_freq)
     numTotal = numOfPos + numOfNeg
     # P(class)
     p_positive = numOfPos / numTotal
