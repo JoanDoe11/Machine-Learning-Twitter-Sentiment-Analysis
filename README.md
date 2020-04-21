@@ -10,7 +10,19 @@ Data: data was given by Racunarski fakultet, for the purpose of this project. Th
 Form of the data is as follows:
 csv file, tokens: (id, sentiment, sentimentText)
 
-# Machine learning
+Input: path to the training data
+Output: classification model with correctness percentage.
+
+## Technologies
+* Python 3.7.4
+
+### Libraries used
+* csv - module which implements classes to read and write tabular data in CSV format. csv.reader returns a reader object which will iterate over lines in the given csvfile.
+* collections.Counter - a container that keeps track of how many times equivalent values are added. (value:frequency)
+* re - module that provides regular expression matching operations
+
+# Additional information
+## Machine learning
 
 Machine learning is the scientific study of algorithms and statistical models that computer systems use to perform a specific task without using explicit instructions. Machine learning algorithms build a mathematical model based on sample data (training data) in order to make predictions or decisions without being explicitly programmed to perform the task.
 
@@ -18,7 +30,7 @@ A feature is an individual measurable property or characteristic of a phenomenon
 
 Feature selection is the process where you automatically or manually select features which contribute most to your prediction variable or output in which you are interested in. When talking about document analysis, feature selection is the process of selecting what we think is worthwhhile in our documents, and what can be ignored. It consists of both document embedding schema and feature selection methods.
 
-# Models for classification
+## Models for classification
 
 Classifiers are models that assign class labels to problem instances, represented as vectors of feature values, where the class labels are drawn from some finite set.
 
@@ -28,7 +40,7 @@ input: `x = (x1,...,xn)` - problem instance that consists of n features
 
 output: `p(Ck|x1,...,xn)` - probability that this instance is a member of Ck class
 
-# Naive Bayes
+## Naive Bayes
 
 Naive Bayes classifiers are a family of simple probabilistic classifiers baseed on applying Bayes theorem with strong independence assumptions between the features. It is a popular method for text categorization, the problem of judging documents as belonging to one category or the other with word frequencies as the features.
 All naive Bayes classifiers assume that the value of a particular feature is independent of the value of any other feature, given the class variable.
@@ -59,13 +71,13 @@ To conclude, the Naive Bayes probability model is denoted as follows:
 
 The Naive Bayes Classifier combines this model with a decision rule, which is often to pick the hypothesis that is most probable (maximum a posteriori decision rule) - pick the Ck for which the probability is the highest.
 
-# initialization
+### Initialization
 
 We can calculate the initial values for p(Ck) in two ways:
 * assuming equiprobable classes - p(Ck) = 1 / #classes
 * calculating an estimate for the class probability from the training set - p(Ck) = |Ck| / #samples
 
-# NLP
+## NLP
 
 Natural Language Processing is a field in machine learning with the ability of a computer to understand, analyze, manipulate and potentually generate human language.
 
@@ -76,12 +88,3 @@ Cleaning up the text data is necessary to highlight attributes that we're going 
 Stemming helps reduce a word to its stem form because it often makes sense to treat related words in the same way. It removes suffices (-ing, -ly..). Lemmatizing derives the root form of a word. It's more axxurate than stemming as it uses a dictionary-based approach - the morphological analysis to the root word, but stemming is faster than lemmatizing because it simply chops off the end of the word.
 
 Vectorizing data is the process of encoding text to a numeric form in order to create feature vectors, so that machine learning algorithms can understand the data.
-
-# Libraries used
-
-* csv - module which implements classes to read and write tabular data in CSV format. csv.reader returns a reader object which will iterate over lines in the given csvfile.
-* collections.Counter - a container that keeps track of how many times equivalent values are added. (value:frequency)
-
-# Solution
-
-Features used in this ML algorithm are sets of words from the same tweet. 
