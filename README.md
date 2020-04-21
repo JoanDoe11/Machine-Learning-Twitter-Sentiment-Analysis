@@ -10,8 +10,8 @@ Data: data was given by Racunarski fakultet, for the purpose of this project. Th
 Form of the data is as follows:
 csv file, tokens: (id, sentiment, sentimentText)
 
-Input: path to the training data
-Output: classification model with correctness percentage.
+* Input: path to the training data
+* Output: classification model with correctness percentage.
 
 ## Technologies
 * Python 3.7.4
