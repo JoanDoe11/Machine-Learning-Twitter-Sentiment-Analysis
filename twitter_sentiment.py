@@ -113,7 +113,7 @@ def learn(learning_data):
     (positive_features, negative_features) = init_class(labels, features)
 
     # calculation of word frequences in classes
-    positive_freq = Counter(positive_features) #see if you can only use this, because the other one counts repetitions
+    positive_freq = Counter(positive_features) 
     negative_freq = Counter(negative_features)
 
     # probability calculations
@@ -123,7 +123,6 @@ def learn(learning_data):
     # P(class) = |class words| / |all words|
     p_positive = numOfPos / numTotal
     p_negative = numOfNeg / numTotal
-    #print("Verovatnoca p/n:"+str(p_positive)+"/"+str(p_negative))
     
     #assembling models
     positive_model = (positive_features, positive_freq, p_positive)
@@ -161,7 +160,6 @@ def init_class(labels, features):
         else:
             for word in words:
                 positive_features.append(word)
-    #print("duzina pozitivnih:"+str(len(positive_features))+"; duzina negativnih:"+str(len(negative_features)))
     return (positive_features, negative_features)
 
 # Naive Bayes prediction
@@ -188,15 +186,14 @@ def prediction(tweet, class_model):
     """
     freq = class_model[1]
     p_class = class_model[2]
-    class_size = len(class_model[0])
+    class_size = sum(freq.values())
 
     tweetWords = Counter(tweet.split(' ')) # words and their occurencies
     result = 1
     for word in tweetWords:
-        freqTweet = tweetWords.get(word) # number of occurancies in the tweet
-        freqClass = freq.get(word,0) # number of occurancies in the class
-        #print("freq in tweet:"+str(freqTweet))
-        #print("freq in class:"+str(freqClass))
+        
+        freqTweet = tweetWords.get(word) + 0 # number of occurancies in the tweet
+        freqClass = freq.get(word,0) + 0 # number of occurancies in the class
         result *= freqTweet * (freqClass + 1) / class_size
     return result * p_class
 

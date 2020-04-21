@@ -1,7 +1,19 @@
 import re
 
-# clean the given tweet from punctuation signs and special characters
+
+
 def clean(tweet):
+    """
+    clean the given tweet from punctuation signs and special characters
+
+    Parameters
+    ----------
+    tweet : string
+        
+    Returns
+    -------
+    string
+    """
     tmp = re.sub(r'\w+:\/{2}[\d\w-]+(\.[\d\w-]+)*(?:(?:\/[^\s/]*))*', '', tweet)
 
     specials = '@#$&%'
@@ -11,10 +23,23 @@ def clean(tweet):
     tmp = re.sub('\t', ' ', tmp)    
     tmp = re.sub(' +', ' ', tmp)
     tmp = tmp.strip()
+    
     return tmp
 
-# leave only lowercase letters in the tweets
+# 
 def letters_only(tweet):
+    """
+    leave only lowercase letters in the tweets
+
+    Parameters
+    ----------
+    tweet : string
+        
+    Returns
+    -------
+    string
+    
+    """
     tmp = tweet.lower()
 
     result = ''
